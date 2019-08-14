@@ -306,6 +306,8 @@ export type MolecularProfileFilter = {
 export type Mutation = {
     'aminoAcidChange': string
 
+        'annotation': string
+
         'center': string
 
         'chr': string

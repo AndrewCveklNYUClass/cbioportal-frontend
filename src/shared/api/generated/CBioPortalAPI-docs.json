@@ -4851,6 +4851,9 @@
         "aminoAcidChange": {
           "type": "string"
         },
+        "annotation": {
+          "type": "string"
+        },
         "center": {
           "type": "string"
         },

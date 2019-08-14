@@ -534,6 +534,10 @@ export type StudyViewFilter = {
 
         'withMutationData': boolean
 
+        'withOncoKBDriverCNAData': boolean
+
+        'withOncoKBDriverMutationData': boolean
+
 };
 export type Treatment = {
     'description': string

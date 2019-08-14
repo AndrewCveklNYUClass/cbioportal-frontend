@@ -2990,6 +2990,12 @@
         },
         "withMutationData": {
           "type": "boolean"
+        },
+        "withOncoKBDriverCNAData": {
+          "type": "boolean"
+        },
+        "withOncoKBDriverMutationData": {
+          "type": "boolean"
         }
       },
       "title": "StudyViewFilter"
