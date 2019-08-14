@@ -163,6 +163,21 @@ export class ChartHeader extends React.Component<IChartHeaderProps, {}> {
                 </li>
             );
         }
+        
+        if (this.props.chartControls && !!this.props.chartControls.showLogScaleToggle) {
+            items.push(
+                <li>
+                    <a className="dropdown-item" href="#" onClick={this.props.toggleLogScale}>
+                        <FlexAlignedCheckbox
+                            checked={!!(this.props.chartControls && this.props.chartControls.logScaleChecked)}
+                            onClick={this.props.toggleLogScale}
+                            label={<span style={{marginTop:-3}}> Samples with driver mutations</span>}
+                            style={{ marginTop:1, marginBottom:-3 }}
+                        />
+                    </a>
+                </li>
+            );
+        }
 
         items.push(
             <li>
