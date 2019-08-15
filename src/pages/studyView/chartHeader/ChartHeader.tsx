@@ -167,10 +167,10 @@ export class ChartHeader extends React.Component<IChartHeaderProps, {}> {
         if (this.props.chartControls && !!this.props.chartControls.showLogScaleToggle) {
             items.push(
                 <li>
-                    <a className="dropdown-item" href="#" onClick={this.props.toggleLogScale}>
+                    <a className="dropdown-item" href="#" onClick={this.props.store.toggleWithOncoKBDriverMutationDataFilter}>
                         <FlexAlignedCheckbox
-                            checked={!!(this.props.chartControls && this.props.chartControls.logScaleChecked)}
-                            onClick={this.props.toggleLogScale}
+                            checked={!!this.props.store.filters.withOncoKBDriverMutationData}
+                            onClick={this.props.store.toggleWithOncoKBDriverMutationDataFilter}
                             label={<span style={{marginTop:-3}}> Samples with driver mutations</span>}
                             style={{ marginTop:1, marginBottom:-3 }}
                         />
