@@ -627,7 +627,7 @@ export class StudyViewPageStore {
 
     @observable private _withMutationDataFilter: boolean | undefined;
     @observable private _withCNADataFilter: boolean | undefined;
-    @observable private _withOncoKBDriverMutationData: boolean | undefined;
+    @observable withOncoKBDriverMutationData: boolean | undefined;
 
     // TODO: make it computed
     // Currently the study view store does not have the full control of the promise.
@@ -918,7 +918,7 @@ export class StudyViewPageStore {
         this._withMutationDataFilter = undefined;
         this._withCNADataFilter = undefined;
         this._withMutationDataFilter = undefined;
-        this._withOncoKBDriverMutationData = undefined;
+        this.withOncoKBDriverMutationData = undefined;
         this.numberOfSelectedSamplesInCustomSelection = 0;
         this.removeComparisonGroupSelectionFilter();
     }
@@ -952,13 +952,10 @@ export class StudyViewPageStore {
     @autobind
     @action
     toggleWithOncoKBDriverMutationDataFilter() {
-        let isSelected = !this._withOncoKBDriverMutationData;
-        this._withOncoKBDriverMutationData = isSelected;
-        if (isSelected) {
-            trackStudyViewFilterEvent("withOncoKBDriverMutationData", this);
-            this.customChartFilterSet.set(UniqueKey.WITH_MUTATION_DATA, [Datalabel.YES]);
+        if (this.withOncoKBDriverMutationData) {
+            this.withOncoKBDriverMutationData = undefined;
         } else {
-            this.customChartFilterSet.delete(UniqueKey.WITH_MUTATION_DATA);
+            this.withOncoKBDriverMutationData = true;
         }
     }
 
@@ -972,12 +969,6 @@ export class StudyViewPageStore {
     @action
     removeWithCNADataFilter() {
         this._withCNADataFilter = undefined;
-    }
-    
-    @autobind
-    @action
-    removeWithOncoKBDriverMutationData() {
-        this._withOncoKBDriverMutationData = undefined;
     }
 
     @computed
@@ -1413,6 +1404,10 @@ export class StudyViewPageStore {
             if(customChartFilterSet !== undefined && customChartFilterSet.length === 1) {
                 filters.withCNAData = this._withCNADataFilter;
             }
+        }
+
+        if(this.withOncoKBDriverMutationData !== undefined) {
+            filters.withOncoKBDriverMutationData = this.withOncoKBDriverMutationData;
         }
 
         return filters as StudyViewFilter;

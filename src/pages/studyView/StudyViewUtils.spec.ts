@@ -164,6 +164,8 @@ describe('StudyViewUtils', () => {
                 },
                 numberOfSamplesPerPatient: [],
                 withCNAData: false,
+                withOncoKBDriverMutationData: false,
+                withOncoKBDriverCNAData: false,
                 withMutationData: false
             } as StudyViewFilterWithSampleIdentifierFilters;
 

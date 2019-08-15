@@ -69,7 +69,9 @@ export interface IChartContainerProps {
     onDeleteChart: (chartMeta: ChartMeta) => void;
     onChangeChartType: (chartMeta: ChartMeta, newChartType: ChartType) => void;
     onToggleLogScale?:any;
+    onToggleWithOncoKBDriverMutationDataFilter?  : () => void;
     logScaleChecked?:boolean;
+    withOncoKBDriverMutationChecked?:boolean;
     showLogScaleToggle?:boolean;
     selectedGenes?:any;
     cancerGenes:number[];
@@ -180,6 +182,13 @@ export class ChartContainer extends React.Component<IChartContainerProps, {}> {
             }
             case ChartTypeEnum.TABLE: {
                 controls = {showPieIcon: true}
+                break;
+            }
+            case ChartTypeEnum.MUTATED_GENES_TABLE: {
+                controls = {
+                    showOncoKBDriverMutationToggle: true,
+                    withOncoKBDriverMutationChecked: this.props.withOncoKBDriverMutationChecked
+                };
                 break;
             }
         }
@@ -482,6 +491,7 @@ export class ChartContainer extends React.Component<IChartContainerProps, {}> {
                     resetChart={this.handlers.resetFilters}
                     deleteChart={this.handlers.onDeleteChart}
                     toggleLogScale={this.handlers.onToggleLogScale}
+                    toggleWithOncoKBDriverMutationDataFilter={this.props.onToggleWithOncoKBDriverMutationDataFilter}
                     chartControls={this.chartControls}
                     changeChartType={this.changeChartType}
                     getSVG={()=>Promise.resolve(this.toSVGDOMNode())}

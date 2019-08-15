@@ -34,6 +34,7 @@ export interface IChartHeaderProps {
     resetChart       : () => void;
     deleteChart      : () => void;
     toggleLogScale?  : () => void;
+    toggleWithOncoKBDriverMutationDataFilter?  : () => void;
     hideLabel?       : boolean;
     chartControls?   : ChartControls;
     changeChartType  : (chartType: ChartType) => void;
@@ -50,6 +51,8 @@ export interface ChartControls {
     showComparisonPageIcon?   : boolean;
     showLogScaleToggle? : boolean;
     logScaleChecked?    : boolean;
+    showOncoKBDriverMutationToggle?    : boolean;
+    withOncoKBDriverMutationChecked?    : boolean;
 }
 
 @observer
@@ -164,15 +167,17 @@ export class ChartHeader extends React.Component<IChartHeaderProps, {}> {
             );
         }
         
-        if (this.props.chartControls && !!this.props.chartControls.showLogScaleToggle) {
+        if (this.props.chartControls && !!this.props.chartControls.showOncoKBDriverMutationToggle) {
             items.push(
                 <li>
-                    <a className="dropdown-item" href="#" onClick={this.props.store.toggleWithOncoKBDriverMutationDataFilter}>
+                    <a className="dropdown-item" href="#" onClick={this.props.toggleWithOncoKBDriverMutationDataFilter}>
                         <FlexAlignedCheckbox
-                            checked={!!this.props.store.filters.withOncoKBDriverMutationData}
-                            onClick={this.props.store.toggleWithOncoKBDriverMutationDataFilter}
-                            label={<span style={{marginTop:-3}}> Samples with driver mutations</span>}
-                            style={{ marginTop:1, marginBottom:-3 }}
+                            checked={!!this.props.chartControls.withOncoKBDriverMutationChecked}
+                            onClick={this.props.toggleWithOncoKBDriverMutationDataFilter}
+                            label={<span style={{marginTop: -3}}> Show driver events only</span>}
+                            style={{
+                                marginTop: 1, marginBottom: -3,
+                                marginLeft: -10}}
                         />
                     </a>
                 </li>

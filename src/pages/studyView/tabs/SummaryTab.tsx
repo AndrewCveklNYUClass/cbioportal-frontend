@@ -159,8 +159,7 @@ export class StudySummaryTab extends React.Component<IStudySummaryTabProps, {}> 
                 props.onDataBinSelection = this.handlers.onDataBinSelection;
                 props.onResetSelection = this.handlers.onDataBinSelection;
                 props.onToggleLogScale = this.handlers.onToggleLogScale;
-                props.showLogScaleToggle = this.store.isLogScaleToggleVisible(
-                    chartMeta.uniqueKey, props.promise!.result);
+                props.showLogScaleToggle = true;
                 props.logScaleChecked = this.store.isLogScaleChecked(chartMeta.uniqueKey);
                 props.getData = () => this.store.getClinicalData(chartMeta);
                 props.downloadTypes = ["Data", "SVG", "PDF"];
@@ -194,6 +193,8 @@ export class StudySummaryTab extends React.Component<IStudySummaryTabProps, {}> 
                 props.getData = () => this.store.getMutatedGenesDownloadData();
                 props.genePanelCache = this.store.genePanelCache;
                 props.downloadTypes = ["Data"];
+                props.onToggleWithOncoKBDriverMutationDataFilter = this.props.store.toggleWithOncoKBDriverMutationDataFilter;
+                props.withOncoKBDriverMutationChecked = this.store.withOncoKBDriverMutationData;
                 break;
             }
             case ChartTypeEnum.CNA_GENES_TABLE: {
