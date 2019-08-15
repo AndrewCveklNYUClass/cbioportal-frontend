@@ -627,6 +627,7 @@ export class StudyViewPageStore {
 
     @observable private _withMutationDataFilter: boolean | undefined;
     @observable private _withCNADataFilter: boolean | undefined;
+    @observable private _withOncoKBDriverMutationData: boolean | undefined;
 
     // TODO: make it computed
     // Currently the study view store does not have the full control of the promise.
@@ -916,6 +917,8 @@ export class StudyViewPageStore {
         this.customChartFilterSet.clear();
         this._withMutationDataFilter = undefined;
         this._withCNADataFilter = undefined;
+        this._withMutationDataFilter = undefined;
+        this._withOncoKBDriverMutationData = undefined;
         this.numberOfSelectedSamplesInCustomSelection = 0;
         this.removeComparisonGroupSelectionFilter();
     }
@@ -945,6 +948,19 @@ export class StudyViewPageStore {
             this.customChartFilterSet.delete(UniqueKey.WITH_CNA_DATA);
         }
     }
+    
+    @autobind
+    @action
+    toggleWithOncoKBDriverMutationDataFilter() {
+        let isSelected = !this._withOncoKBDriverMutationData;
+        this._withOncoKBDriverMutationData = isSelected;
+        if (isSelected) {
+            trackStudyViewFilterEvent("withOncoKBDriverMutationData", this);
+            this.customChartFilterSet.set(UniqueKey.WITH_MUTATION_DATA, [Datalabel.YES]);
+        } else {
+            this.customChartFilterSet.delete(UniqueKey.WITH_MUTATION_DATA);
+        }
+    }
 
     @autobind
     @action
@@ -956,6 +972,12 @@ export class StudyViewPageStore {
     @action
     removeWithCNADataFilter() {
         this._withCNADataFilter = undefined;
+    }
+    
+    @autobind
+    @action
+    removeWithOncoKBDriverMutationData() {
+        this._withOncoKBDriverMutationData = undefined;
     }
 
     @computed
